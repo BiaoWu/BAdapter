@@ -65,20 +65,26 @@ public class BAdapter extends RecyclerView.Adapter<BViewHolder> {
 
   public static class Builder {
     private DataSource dataSource;
-    private ViewHolderManager viewHolderManager;
+    private ItemDelegate itemDelegate;
 
     public Builder dataSource(DataSource dataSource) {
       this.dataSource = dataSource;
       return this;
     }
 
-    public Builder viewHolderManager(ViewHolderManager viewHolderManager) {
-      this.viewHolderManager = viewHolderManager;
+    public Builder itemDelegate(ItemDelegate itemDelegate) {
+      this.itemDelegate = itemDelegate;
       return this;
     }
 
     public BAdapter build() {
-      //// TODO: 16/7/22 默认实现
+      if (dataSource == null) {
+        dataSource = new BDataSource();
+      }
+
+      ItemDelegate itemDelegate = checkNotNull(this.itemDelegate, "itemDelegate cannot be null!");
+
+      ViewHolderManager viewHolderManager = new BViewHolderManager(dataSource, itemDelegate);
 
       return new BAdapter(dataSource, viewHolderManager);
     }
