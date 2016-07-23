@@ -1,4 +1,4 @@
-package com.biao.badapter.datasource;
+package com.biao.badapter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 /**
  * @author biaowu.
  */
-public class SimpleDataSourceTest {
+public class BDataSourceTest {
   private static final String ME = "Bill";
   private static final String YOU = "You";
   private static final String HE = "He";
@@ -19,10 +19,10 @@ public class SimpleDataSourceTest {
 
   private List<String> testList = Arrays.asList(ME, YOU, HE, SHE);
 
-  private SimpleDataSource<String> dataSource;
+  private BDataSource<String> dataSource;
 
   @Before public void setUp() throws Exception {
-    dataSource = new SimpleDataSource<>();
+    dataSource = new BDataSource<>();
   }
 
   @Test public void test_init_size() throws Exception {

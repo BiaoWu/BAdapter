@@ -15,20 +15,25 @@
  */
 package com.biao.badapter;
 
-import android.view.ViewGroup;
-
 /**
- * Interface for create or bind {@link BViewHolder}.
+ * DataSource for {@link BAdapter}
  *
  * @author biaowu.
  */
-public interface BViewHolderManager {
-  /** {@link BAdapter#onCreateViewHolder(ViewGroup, int)} */
-  BViewHolder onCreateViewHolder(ViewGroup parent, int viewType);
+public interface DataSource<Data> {
 
-  /** {@link BAdapter#onBindViewHolder(BViewHolder, int)} */
-  void onBindViewHolder(BViewHolder holder, int position);
+  /**
+   * Returns the number of datas
+   *
+   * @return the number of datas
+   */
+  int size();
 
-  /** {@link BAdapter#getItemViewType(int)} */
-  int getItemViewType(int position);
+  /**
+   * Returns the data at the specified position.
+   *
+   * @param position the position of the data to return.
+   * @return the data at the specified position.
+   */
+  Data get(int position);
 }

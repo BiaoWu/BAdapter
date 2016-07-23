@@ -15,25 +15,96 @@
  */
 package com.biao.badapter;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 /**
- * DataSource for {@link BAdapter}
+ * Simple DataSource
  *
  * @author biaowu.
  */
-public interface BDataSource<Data> {
+public class BDataSource<Data> implements DataSource<Data> {
+  private static final String TAG = "SimpleDataSource";
 
-  /**
-   * Returns the number of datas
-   *
-   * @return the number of datas
-   */
-  int size();
+  private ArrayList<Data> dataList;
 
-  /**
-   * Returns the data at the specified position.
-   *
-   * @param position the position of the data to return.
-   * @return the data at the specified position.
-   */
-  Data get(int position);
+  public BDataSource() {
+    this.dataList = new ArrayList<>();
+  }
+
+  public BDataSource(List<Data> dataList) {
+    this.dataList = new ArrayList<>(dataList);
+  }
+
+  @Override public int size() {
+    return dataList.size();
+  }
+
+  public void add(Data data) {
+    dataList.add(data);
+  }
+
+  public void add(int position, Data data) {
+    if (!checkPosition(position)) return;
+
+    dataList.add(position, data);
+  }
+
+  public void addAll(Collection<Data> collection) {
+    if (collection == null) return;
+
+    dataList.addAll(collection);
+  }
+
+  public void remove(int position) {
+    if (!checkPosition(position)) return;
+
+    dataList.remove(position);
+  }
+
+  public void remove(Data data) {
+    remove(dataList.indexOf(data));
+  }
+
+  public void removeAll(Collection<Data> collection) {
+    if (collection == null) return;
+
+    dataList.removeAll(collection);
+  }
+
+  public void removeAll() {
+    dataList.clear();
+  }
+
+  public void update(int position, Data data) {
+    if (!checkPosition(position)) return;
+
+    dataList.set(position, data);
+  }
+
+  public void replaceAll(Collection<Data> collection) {
+    if (collection == null) return;
+
+    dataList.clear();
+    dataList.addAll(collection);
+  }
+
+  @Override public Data get(int position) {
+    if (!checkPosition(position)) return null;
+
+    return dataList.get(position);
+  }
+
+  public int getIndex(Data data) {
+    return dataList.indexOf(data);
+  }
+
+  public List<Data> getDataList() {
+    return dataList;
+  }
+
+  private boolean checkPosition(int position) {
+    return position >= 0 && position < dataList.size();
+  }
 }

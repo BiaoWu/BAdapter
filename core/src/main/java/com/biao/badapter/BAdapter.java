@@ -34,10 +34,10 @@ import static com.biao.badapter.util.PreConditions.checkNotNull;
  * @author biaowu.
  */
 public class BAdapter extends RecyclerView.Adapter<BViewHolder> {
-  private BDataSource dataSource;
-  private BViewHolderManager viewHolderManager;
+  private DataSource dataSource;
+  private ViewHolderManager viewHolderManager;
 
-  private BAdapter(BDataSource dataSource, BViewHolderManager viewHolderManager) {
+  private BAdapter(DataSource dataSource, ViewHolderManager viewHolderManager) {
     this.dataSource = checkNotNull(dataSource, "dataSource cannot be null!!!");
     this.viewHolderManager = checkNotNull(viewHolderManager, "viewHolderManager cannot be null!!!");
   }
@@ -64,15 +64,15 @@ public class BAdapter extends RecyclerView.Adapter<BViewHolder> {
   }
 
   public static class Builder {
-    private BDataSource dataSource;
-    private BViewHolderManager viewHolderManager;
+    private DataSource dataSource;
+    private ViewHolderManager viewHolderManager;
 
-    public Builder dataSource(BDataSource dataSource) {
+    public Builder dataSource(DataSource dataSource) {
       this.dataSource = dataSource;
       return this;
     }
 
-    public Builder viewHolderManager(BViewHolderManager viewHolderManager) {
+    public Builder viewHolderManager(ViewHolderManager viewHolderManager) {
       this.viewHolderManager = viewHolderManager;
       return this;
     }
