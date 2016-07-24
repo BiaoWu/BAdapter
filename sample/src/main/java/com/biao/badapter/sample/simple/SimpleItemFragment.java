@@ -4,10 +4,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.biao.badapter.BAdapter;
 import com.biao.badapter.BDataSource;
 import com.biao.badapter.BViewHolder;
 import com.biao.badapter.ItemDelegate;
+import com.biao.badapter.OnItemClickListener;
 import com.biao.badapter.sample.BFragment;
 
 /**
@@ -31,11 +33,13 @@ public class SimpleItemFragment extends BFragment {
         TextView textView = (TextView) holder.itemView.findViewById(android.R.id.text1);
         textView.setText(s);
       }
-
-      @Override public boolean onIntercept(int position, Object o) {
-        return true;
-      }
     };
+
+    itemDelegate.setOnItemClickListener(new OnItemClickListener<String>() {
+      @Override public void onItemClick(View view, int position, String s) {
+        Toast.makeText(view.getContext(), s, Toast.LENGTH_SHORT).show();
+      }
+    });
 
     return BAdapter.builder().dataSource(dataSource).itemDelegate(itemDelegate).build();
   }
