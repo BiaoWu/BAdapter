@@ -15,8 +15,11 @@
  */
 package com.biao.badapter;
 
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import com.biao.badapter.util.PreConditions;
+import java.util.List;
 
 /**
  * implement of {@link ViewHolderManager}
@@ -24,25 +27,44 @@ import android.view.ViewGroup;
  * @author biaowu.
  */
 /* package */class BViewHolderManager implements ViewHolderManager {
-  private DataSource dataSource;
-  private ItemDelegate itemDelegate;
+  private static final String MISS_ITEM_DELEGATE = "Not found the itemDelegate!!";
 
-  /* package */BViewHolderManager(DataSource dataSource, ItemDelegate itemDelegate) {
+  private DataSource dataSource;
+  private SparseArray<ItemDelegate> itemDelegates;
+
+  /* package */BViewHolderManager(DataSource dataSource, List<ItemDelegate> list) {
     this.dataSource = dataSource;
-    this.itemDelegate = itemDelegate;
+
+    int size = list.size();
+    itemDelegates = new SparseArray<>(size);
+
+    int viewType = 0;
+    for (int i = 0; i < size; i++) {
+      itemDelegates.put(++viewType, list.get(i));
+    }
   }
 
   @Override public BViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    return itemDelegate.onCreateViewHolder(LayoutInflater.from(parent.getContext()), parent);
+    return PreConditions.checkNotNull(itemDelegates.get(viewType), MISS_ITEM_DELEGATE)
+        .onCreateViewHolder(LayoutInflater.from(parent.getContext()), parent);
   }
 
   @SuppressWarnings("unchecked") @Override
   public void onBindViewHolder(BViewHolder holder, int position) {
+    int viewType = holder.getItemViewType();
+    ItemDelegate itemDelegate =
+        PreConditions.checkNotNull(itemDelegates.get(viewType), MISS_ITEM_DELEGATE);
+
     itemDelegate.onBind(holder, dataSource.get(position));
   }
 
   @Override public int getItemViewType(int position) {
-    //// TODO: 16/7/23 multi type
-    return 0;
+    for (int i = 0; i < itemDelegates.size(); i++) {
+      int viewType = itemDelegates.keyAt(i);
+      if (itemDelegates.get(viewType).onIntercept(position, dataSource.get(position))) {
+        return viewType;
+      }
+    }
+    throw new IllegalArgumentException("Not found the viewType at position -> " + position);
   }
 }
