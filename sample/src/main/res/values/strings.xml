@@ -1,3 +1,16 @@
 <resources>
-  <string name="app_name">BAdapterSample</string>
+  <string name="app_name">BAdapter</string>
+  <string name="app_desc">A graceful RecyclerView Adapter</string>
+
+  <string name="readme">https://raw.githubusercontent.com/BiaoWu/BAdapter/master/README.md</string>
+
+  <string name="open_string"> </string>
+  <string name="close_string"> </string>
+
+  <string name="main_nav_home">Home</string>
+  <string name="main_simple_item">Simple Item</string>
+  <string name="main_multi_item">Multi Item</string>
+
+  <string name="person">Person id : %1$d, name : %2$s</string>
+  <string name="type">Type %1$d</string>
 </resources>

@@ -17,6 +17,8 @@ package com.biao.badapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.biao.badapter.util.PreConditions.checkNotNull;
 
@@ -65,7 +67,7 @@ public class BAdapter extends RecyclerView.Adapter<BViewHolder> {
 
   public static class Builder {
     private DataSource dataSource;
-    private ItemDelegate itemDelegate;
+    private List<ItemDelegate> itemDelegates;
 
     public Builder dataSource(DataSource dataSource) {
       this.dataSource = dataSource;
@@ -73,7 +75,10 @@ public class BAdapter extends RecyclerView.Adapter<BViewHolder> {
     }
 
     public Builder itemDelegate(ItemDelegate itemDelegate) {
-      this.itemDelegate = itemDelegate;
+      if (itemDelegates == null) {
+        itemDelegates = new ArrayList<>(3);
+      }
+      itemDelegates.add(itemDelegate);
       return this;
     }
 
@@ -82,9 +87,8 @@ public class BAdapter extends RecyclerView.Adapter<BViewHolder> {
         dataSource = new BDataSource();
       }
 
-      ItemDelegate itemDelegate = checkNotNull(this.itemDelegate, "itemDelegate cannot be null!");
-
-      ViewHolderManager viewHolderManager = new BViewHolderManager(dataSource, itemDelegate);
+      ViewHolderManager viewHolderManager = new BViewHolderManager(dataSource,
+          checkNotNull(itemDelegates, "itemDelegate cannot be null!"));
 
       return new BAdapter(dataSource, viewHolderManager);
     }

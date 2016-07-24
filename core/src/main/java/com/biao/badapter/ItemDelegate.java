@@ -20,4 +20,6 @@ public interface ItemDelegate<Data> {
   BViewHolder onCreateViewHolder(LayoutInflater inflater, ViewGroup parent);
 
   void onBind(BViewHolder holder, Data data);
+
+  boolean onIntercept(int position, Object o);
 }
