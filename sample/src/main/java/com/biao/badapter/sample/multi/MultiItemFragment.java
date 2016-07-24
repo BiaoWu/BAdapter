@@ -4,10 +4,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.biao.badapter.BAdapter;
 import com.biao.badapter.BDataSource;
 import com.biao.badapter.BViewHolder;
 import com.biao.badapter.ItemDelegate;
+import com.biao.badapter.OnItemClickListener;
 import com.biao.badapter.sample.BFragment;
 import com.biao.badapter.sample.R;
 
@@ -40,6 +42,13 @@ public class MultiItemFragment extends BFragment {
       }
     };
 
+    itemDelegate1.setOnItemClickListener(new OnItemClickListener<Person>() {
+      @Override public void onItemClick(View view, int position, Person person) {
+        Toast.makeText(view.getContext(), "Item Type 1 -> " + person.name, Toast.LENGTH_SHORT)
+            .show();
+      }
+    });
+
     ItemDelegate<Person> itemDelegate2 = new ItemDelegate<Person>() {
       @Override public BViewHolder onCreateViewHolder(LayoutInflater inflater, ViewGroup parent) {
         View itemView = inflater.inflate(android.R.layout.simple_list_item_2, parent, false);
@@ -57,6 +66,13 @@ public class MultiItemFragment extends BFragment {
         return position % 2 != 0;
       }
     };
+
+    itemDelegate2.setOnItemClickListener(new OnItemClickListener<Person>() {
+      @Override public void onItemClick(View view, int position, Person person) {
+        Toast.makeText(view.getContext(), "Item Type 2 -> " + person.name, Toast.LENGTH_SHORT)
+            .show();
+      }
+    });
 
     return BAdapter.builder()
         .dataSource(dataSource)

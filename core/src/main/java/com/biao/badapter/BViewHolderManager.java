@@ -17,6 +17,7 @@ package com.biao.badapter;
 
 import android.util.SparseArray;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import com.biao.badapter.util.PreConditions;
 import java.util.List;
@@ -31,6 +32,15 @@ import java.util.List;
 
   private DataSource dataSource;
   private SparseArray<ItemDelegate> itemDelegates;
+
+  private View.OnClickListener onItemClick = new View.OnClickListener() {
+    @Override public void onClick(View v) {
+      int position = (int) v.getTag(R.id.rv_position);
+      int itemType = (int) v.getTag(R.id.rv_view_type);
+
+      onItemViewClick(v, itemType, position);
+    }
+  };
 
   /* package */BViewHolderManager(DataSource dataSource, List<ItemDelegate> list) {
     this.dataSource = dataSource;
@@ -56,6 +66,13 @@ import java.util.List;
         PreConditions.checkNotNull(itemDelegates.get(viewType), MISS_ITEM_DELEGATE);
 
     itemDelegate.onBind(holder, dataSource.get(position));
+
+    //set item click
+    if (itemDelegate.onItemClickListener != null) {
+      holder.itemView.setTag(R.id.rv_position, position);
+      holder.itemView.setTag(R.id.rv_view_type, viewType);
+      holder.itemView.setOnClickListener(onItemClick);
+    }
   }
 
   @Override public int getItemViewType(int position) {
@@ -66,5 +83,16 @@ import java.util.List;
       }
     }
     throw new IllegalArgumentException("Not found the viewType at position -> " + position);
+  }
+
+  @SuppressWarnings("unchecked")
+  private void onItemViewClick(View view, int itemType, int position) {
+    ItemDelegate itemDelegate =
+        PreConditions.checkNotNull(itemDelegates.get(itemType), MISS_ITEM_DELEGATE);
+
+    OnItemClickListener onItemClickListener = itemDelegate.onItemClickListener;
+    if (onItemClickListener != null) {
+      onItemClickListener.onItemClick(view, position, dataSource.get(position));
+    }
   }
 }
