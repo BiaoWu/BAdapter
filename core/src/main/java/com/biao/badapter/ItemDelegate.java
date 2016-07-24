@@ -15,7 +15,9 @@
  */
 package com.biao.badapter;
 
+import android.support.annotation.IdRes;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 /**
@@ -32,6 +34,7 @@ import android.view.ViewGroup;
  * @author biaowu.
  */
 public abstract class ItemDelegate<Data> {
+  /* package */ int[] clickViewIds;
   /* package */ OnItemClickListener<Data> onItemClickListener;
 
   /** {@link BViewHolderManager#onCreateViewHolder(ViewGroup, int)} */
@@ -51,6 +54,35 @@ public abstract class ItemDelegate<Data> {
     return true;
   }
 
+  /**
+   * Pass the click to {@link OnItemClickListener#onItemClick(View, int, Object)}
+   * <pre>
+   *    itemDelegate.dispatchViewClick(id1, id2)
+   *      .setOnItemClickListener(new OnItemClickListener<Data>() {
+   *         @Override public void onItemClick(View view, int position, Data data) {
+   *           switch (view.getId()) {
+   *             case id1:
+   *               break;
+   *             case id2:
+   *               break;
+   *             default:
+   *               break;
+   *           }
+   *     }
+   *   });
+   * </pre>
+   */
+  @SuppressWarnings("unchecked") public <T extends ItemDelegate<Data>> T dispatchViewClick(
+      @IdRes int... ids) {
+    clickViewIds = ids;
+    return (T) this;
+  }
+
+  /**
+   * Register a callback to be invoked when this view is clicked.
+   *
+   * @param onItemClickListener The callback that will run
+   */
   public void setOnItemClickListener(OnItemClickListener<Data> onItemClickListener) {
     this.onItemClickListener = onItemClickListener;
   }

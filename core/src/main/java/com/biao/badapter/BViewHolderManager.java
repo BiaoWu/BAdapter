@@ -15,6 +15,7 @@
  */
 package com.biao.badapter;
 
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ import java.util.List;
  * @author biaowu.
  */
 /* package */class BViewHolderManager implements ViewHolderManager {
+  private static final String TAG = "BViewHolderManager";
   private static final String MISS_ITEM_DELEGATE = "Not found the itemDelegate!!";
 
   private DataSource dataSource;
@@ -72,6 +74,20 @@ import java.util.List;
       holder.itemView.setTag(R.id.rv_position, position);
       holder.itemView.setTag(R.id.rv_view_type, viewType);
       holder.itemView.setOnClickListener(onItemClick);
+
+      int[] ids = itemDelegate.clickViewIds;
+      if (ids == null) return;
+
+      for (int id : ids) {
+        View view = holder.itemView.findViewById(id);
+        if (view != null) {
+          view.setTag(R.id.rv_position, position);
+          view.setTag(R.id.rv_view_type, viewType);
+          view.setOnClickListener(onItemClick);
+        } else {
+          Log.e(TAG, "Not found the view by id -> " + id);
+        }
+      }
     }
   }
 
