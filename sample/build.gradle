@@ -25,8 +25,7 @@ android {
 }
 
 dependencies {
-  compile project(':core')
-  testCompile rootProject.ext.junit
+  compile project(':delegate-simple')
   compile "com.android.support:design:$rootProject.ext.supportLibrariesVersion"
   compile 'us.feras.mdv:markdownview:1.1.0'
 }
