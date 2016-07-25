@@ -19,10 +19,24 @@ import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 
 /**
  * Simple ViewHolder
+ *
+ * TODO: 16/7/25 if you need more methods for help, welcome pull request!
  *
  * @author biaowu.
  */
@@ -34,21 +48,63 @@ public class BSimpleViewHolder extends RecyclerView.ViewHolder {
     views = new SparseArray<>();
   }
 
-  public void setText(@IdRes int id, CharSequence text) {
-    TextView textView = getView(id);
-    textView.setText(text);
+  /** return ViewGroup of {@link #getView(int)} */
+  public ViewGroup getViewGroup(@IdRes int id) {
+    return getView(id);
   }
 
-  // TODO: 16/7/25 add more help methods
-  // ...
-  // ...
+  /** return TextView of {@link #getView(int)} */
+  public TextView getTextView(@IdRes int id) {
+    return getView(id);
+  }
 
+  /** return ImageView of {@link #getView(int)} */
+  public ImageView getImageView(@IdRes int id) {
+    return getView(id);
+  }
+
+  /** return EditText of {@link #getView(int)} */
+  public EditText getEditText(@IdRes int id) {
+    return getView(id);
+  }
+
+  /**
+   * return CompoundButton of {@link #getView(int)}
+   *
+   * @see Switch
+   * @see RadioButton
+   * @see CheckBox
+   */
+  public CompoundButton getCompoundButton(@IdRes int id) {
+    return getView(id);
+  }
+
+  /** return ProgressBar of {@link #getView(int)} */
+  public ProgressBar getProgressBar(@IdRes int id) {
+    return getView(id);
+  }
+
+  /**
+   * return AdapterView of {@link #getView(int)}
+   *
+   * @see ListView
+   * @see GridView
+   * @see Spinner
+   */
+  public AdapterView getAdapterView(@IdRes int id) {
+    return getView(id);
+  }
+
+  /**
+   * Your mistakes:
+   * 1. null if not found
+   * 2. cast exception
+   */
   @SuppressWarnings("unchecked") public <T extends View> T getView(@IdRes int id) {
     View view = views.get(id);
     if (view == null) {
       view = itemView.findViewById(id);
     }
-
     return (T) view;
   }
 }

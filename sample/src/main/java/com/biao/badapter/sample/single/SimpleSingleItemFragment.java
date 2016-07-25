@@ -7,9 +7,10 @@ import android.widget.Toast;
 import com.biao.badapter.BAdapter;
 import com.biao.badapter.BDataSource;
 import com.biao.badapter.OnItemClickListener;
-import com.biao.badapter.sample.BFragment;
 import com.biao.badapter.itemdelegate.simple.BSimpleItemDelegate;
 import com.biao.badapter.itemdelegate.simple.BSimpleViewHolder;
+import com.biao.badapter.sample.BFragment;
+import com.biao.badapter.sample.R;
 
 /**
  * sample of BSimpleItemDelegate
@@ -21,24 +22,32 @@ public class SimpleSingleItemFragment extends BFragment {
   @Override protected BAdapter buildAdapter() {
     BDataSource<String> dataSource = new BDataSource<>();
     for (int i = 0; i < 30; i++) {
-      dataSource.add("Test Data index : " + i);
+      dataSource.add("index : " + i);
     }
 
     BSimpleItemDelegate<String> itemDelegate = new BSimpleItemDelegate<String>() {
       @Override protected View onCreateView(LayoutInflater inflater, ViewGroup parent) {
-        return inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+        return inflater.inflate(R.layout.simple_text_1, parent, false);
       }
 
       @Override public void onBind(BSimpleViewHolder holder, String s) {
-        holder.setText(android.R.id.text1, s);
+        holder.getTextView(R.id.tv_content).setText(s);
       }
     };
 
-    itemDelegate.setOnItemClickListener(new OnItemClickListener<String>() {
-      @Override public void onItemClick(View view, int position, String s) {
-        Toast.makeText(view.getContext(), s, Toast.LENGTH_SHORT).show();
-      }
-    });
+    itemDelegate.dispatchViewClick(R.id.image)
+        .setOnItemClickListener(new OnItemClickListener<String>() {
+          @Override public void onItemClick(View view, int position, String s) {
+            switch (view.getId()) {
+              case R.id.image:
+                Toast.makeText(view.getContext(), "Image Click at " + s, Toast.LENGTH_SHORT).show();
+                break;
+              default:
+                Toast.makeText(view.getContext(), "Item Click at " + s, Toast.LENGTH_SHORT).show();
+                break;
+            }
+          }
+        });
 
     return BAdapter.builder().dataSource(dataSource).itemDelegate(itemDelegate).build();
   }

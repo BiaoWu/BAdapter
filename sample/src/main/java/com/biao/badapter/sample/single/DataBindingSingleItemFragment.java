@@ -8,6 +8,7 @@ import com.biao.badapter.BAdapter;
 import com.biao.badapter.BDataSource;
 import com.biao.badapter.OnItemClickListener;
 import com.biao.badapter.sample.BFragment;
+import com.biao.badapter.sample.R;
 import com.biao.badapter.sample.databinding.SimpleText1Binding;
 import com.biao.delegate.databinding.BDataBindingItemDelegate;
 import com.biao.delegate.databinding.BDataBindingViewHolder;
@@ -22,7 +23,7 @@ public class DataBindingSingleItemFragment extends BFragment {
   @Override protected BAdapter buildAdapter() {
     BDataSource<String> dataSource = new BDataSource<>();
     for (int i = 0; i < 30; i++) {
-      dataSource.add("Test Data index : " + i);
+      dataSource.add("index : " + i);
     }
 
     BDataBindingItemDelegate<SimpleText1Binding, String> itemDelegate =
@@ -38,11 +39,19 @@ public class DataBindingSingleItemFragment extends BFragment {
           }
         };
 
-    itemDelegate.setOnItemClickListener(new OnItemClickListener<String>() {
-      @Override public void onItemClick(View view, int position, String s) {
-        Toast.makeText(view.getContext(), s, Toast.LENGTH_SHORT).show();
-      }
-    });
+    itemDelegate.dispatchViewClick(R.id.image)
+        .setOnItemClickListener(new OnItemClickListener<String>() {
+          @Override public void onItemClick(View view, int position, String s) {
+            switch (view.getId()) {
+              case R.id.image:
+                Toast.makeText(view.getContext(), "Image Click at " + s, Toast.LENGTH_SHORT).show();
+                break;
+              default:
+                Toast.makeText(view.getContext(), "Item Click at " + s, Toast.LENGTH_SHORT).show();
+                break;
+            }
+          }
+        });
 
     return BAdapter.builder().dataSource(dataSource).itemDelegate(itemDelegate).build();
   }
