@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+  <data>
+    <variable
+        name="person"
+        type="com.biao.badapter.sample.multi.Person"
+        />
+  </data>
+
+
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:minHeight="?attr/listPreferredItemHeight"
+      android:orientation="vertical"
+      android:padding="16dp"
+      >
+
+    <TextView
+        android:id="@+id/tv_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@{@string/person_id(person.id)}"
+        />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@{@string/person_name(person.name)}"
+        />
+
+  </LinearLayout>
+</layout>

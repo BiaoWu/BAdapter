@@ -15,6 +15,7 @@
  */
 package com.biao.badapter;
 
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -56,13 +57,13 @@ import java.util.List;
     }
   }
 
-  @Override public BViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  @Override public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     return PreConditions.checkNotNull(itemDelegates.get(viewType), MISS_ITEM_DELEGATE)
         .onCreateViewHolder(LayoutInflater.from(parent.getContext()), parent);
   }
 
   @SuppressWarnings("unchecked") @Override
-  public void onBindViewHolder(BViewHolder holder, int position) {
+  public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
     int viewType = holder.getItemViewType();
     ItemDelegate itemDelegate =
         PreConditions.checkNotNull(itemDelegates.get(viewType), MISS_ITEM_DELEGATE);

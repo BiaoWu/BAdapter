@@ -15,19 +15,20 @@
  */
 package com.biao.badapter;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 /**
- * Interface for create or bind {@link BViewHolder}.
+ * Interface for create or bind {@link RecyclerView.ViewHolder}.
  *
  * @author biaowu.
  */
 public interface ViewHolderManager {
   /** {@link BAdapter#onCreateViewHolder(ViewGroup, int)} */
-  BViewHolder onCreateViewHolder(ViewGroup parent, int viewType);
+  RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType);
 
-  /** {@link BAdapter#onBindViewHolder(BViewHolder, int)} */
-  void onBindViewHolder(BViewHolder holder, int position);
+  /** {@link BAdapter#onBindViewHolder(RecyclerView.ViewHolder, int)} */
+  void onBindViewHolder(RecyclerView.ViewHolder holder, int position);
 
   /** {@link BAdapter#getItemViewType(int)} */
   int getItemViewType(int position);

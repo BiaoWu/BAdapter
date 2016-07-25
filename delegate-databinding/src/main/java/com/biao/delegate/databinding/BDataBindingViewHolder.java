@@ -13,18 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.biao.badapter;
+package com.biao.delegate.databinding;
 
+import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 /**
- * Just ViewHolder
+ * DataBinding ViewHolder
  *
  * @author biaowu.
  */
-public class BViewHolder extends RecyclerView.ViewHolder {
-  public BViewHolder(View itemView) {
-    super(itemView);
+public class BDataBindingViewHolder<Binding extends ViewDataBinding>
+    extends RecyclerView.ViewHolder {
+
+  public final Binding binding;
+
+  public BDataBindingViewHolder(Binding binding) {
+    super(binding.getRoot());
+    this.binding = binding;
   }
 }
