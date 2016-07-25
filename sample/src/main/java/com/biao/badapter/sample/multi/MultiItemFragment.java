@@ -42,12 +42,25 @@ public class MultiItemFragment extends BFragment {
       }
     };
 
-    itemDelegate1.setOnItemClickListener(new OnItemClickListener<Person>() {
-      @Override public void onItemClick(View view, int position, Person person) {
-        Toast.makeText(view.getContext(), "Item Type 1 -> " + person.name, Toast.LENGTH_SHORT)
-            .show();
-      }
-    });
+    itemDelegate1.dispatchViewClick(android.R.id.text1, android.R.id.text2)
+        .setOnItemClickListener(new OnItemClickListener<Person>() {
+          @Override public void onItemClick(View view, int position, Person person) {
+            switch (view.getId()) {
+              case android.R.id.text1:
+                Toast.makeText(view.getContext(), "text1 click Type 1 -> " + person.name,
+                    Toast.LENGTH_SHORT).show();
+                break;
+              case android.R.id.text2:
+                Toast.makeText(view.getContext(), "text2 click Type 1 -> " + person.name,
+                    Toast.LENGTH_SHORT).show();
+                break;
+              default:
+                Toast.makeText(view.getContext(), "itemView click Type 1 -> " + person.name,
+                    Toast.LENGTH_SHORT).show();
+                break;
+            }
+          }
+        });
 
     ItemDelegate<Person> itemDelegate2 = new ItemDelegate<Person>() {
       @Override public BViewHolder onCreateViewHolder(LayoutInflater inflater, ViewGroup parent) {
@@ -67,12 +80,25 @@ public class MultiItemFragment extends BFragment {
       }
     };
 
-    itemDelegate2.setOnItemClickListener(new OnItemClickListener<Person>() {
-      @Override public void onItemClick(View view, int position, Person person) {
-        Toast.makeText(view.getContext(), "Item Type 2 -> " + person.name, Toast.LENGTH_SHORT)
-            .show();
-      }
-    });
+    itemDelegate2.dispatchViewClick(android.R.id.text1, android.R.id.text2)
+        .setOnItemClickListener(new OnItemClickListener<Person>() {
+          @Override public void onItemClick(View view, int position, Person person) {
+            switch (view.getId()) {
+              case android.R.id.text1:
+                Toast.makeText(view.getContext(), "text1 click Type 2 -> " + person.name,
+                    Toast.LENGTH_SHORT).show();
+                break;
+              case android.R.id.text2:
+                Toast.makeText(view.getContext(), "text2 click Type 2 -> " + person.name,
+                    Toast.LENGTH_SHORT).show();
+                break;
+              default:
+                Toast.makeText(view.getContext(), "itemView click Type 2 -> " + person.name,
+                    Toast.LENGTH_SHORT).show();
+                break;
+            }
+          }
+        });
 
     return BAdapter.builder()
         .dataSource(dataSource)
