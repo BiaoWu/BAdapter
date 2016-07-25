@@ -14,4 +14,8 @@ public class Person {
     this.id = id;
     this.name = name;
   }
+
+  @Override public String toString() {
+    return "Person {id: " + id + ", name: " + name + "} ";
+  }
 }

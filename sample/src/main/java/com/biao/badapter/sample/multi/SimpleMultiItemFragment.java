@@ -24,13 +24,12 @@ public class SimpleMultiItemFragment extends BFragment {
     }
 
     BSimpleItemDelegate<Person> itemDelegate1 = new BSimpleItemDelegate<Person>() {
-      @Override public View onCreateView(LayoutInflater inflater, ViewGroup parent) {
-        return inflater.inflate(android.R.layout.simple_list_item_2, parent, false);
+      @Override protected View onCreateView(LayoutInflater inflater, ViewGroup parent) {
+        return inflater.inflate(R.layout.simple_text_1, parent, false);
       }
 
       @Override public void onBind(BSimpleViewHolder holder, Person person) {
-        holder.setText(android.R.id.text1, getString(R.string.type, 1));
-        holder.setText(android.R.id.text2, getString(R.string.person, person.id, person.name));
+        holder.getTextView(R.id.tv_content).setText(person.toString());
       }
 
       @Override public boolean onIntercept(int position, Object o) {
@@ -38,20 +37,16 @@ public class SimpleMultiItemFragment extends BFragment {
       }
     };
 
-    itemDelegate1.dispatchViewClick(android.R.id.text1, android.R.id.text2)
+    itemDelegate1.dispatchViewClick(R.id.image)
         .setOnItemClickListener(new OnItemClickListener<Person>() {
           @Override public void onItemClick(View view, int position, Person person) {
             switch (view.getId()) {
-              case android.R.id.text1:
-                Toast.makeText(view.getContext(), "text1 click Type 1 -> " + person.name,
-                    Toast.LENGTH_SHORT).show();
-                break;
-              case android.R.id.text2:
-                Toast.makeText(view.getContext(), "text2 click Type 1 -> " + person.name,
+              case R.id.image:
+                Toast.makeText(view.getContext(), "Image Click at position : " + position,
                     Toast.LENGTH_SHORT).show();
                 break;
               default:
-                Toast.makeText(view.getContext(), "itemView click Type 1 -> " + person.name,
+                Toast.makeText(view.getContext(), "Item Click at position : " + position,
                     Toast.LENGTH_SHORT).show();
                 break;
             }
@@ -59,13 +54,12 @@ public class SimpleMultiItemFragment extends BFragment {
         });
 
     BSimpleItemDelegate<Person> itemDelegate2 = new BSimpleItemDelegate<Person>() {
-      @Override public View onCreateView(LayoutInflater inflater, ViewGroup parent) {
-        return inflater.inflate(android.R.layout.simple_list_item_2, parent, false);
+      @Override protected View onCreateView(LayoutInflater inflater, ViewGroup parent) {
+        return inflater.inflate(R.layout.simple_text_2, parent, false);
       }
 
       @Override public void onBind(BSimpleViewHolder holder, Person person) {
-        holder.setText(android.R.id.text1, getString(R.string.type, 2));
-        holder.setText(android.R.id.text2, getString(R.string.person, person.id, person.name));
+        holder.getTextView(R.id.tv_content).setText(person.toString());
       }
 
       @Override public boolean onIntercept(int position, Object o) {
@@ -73,20 +67,16 @@ public class SimpleMultiItemFragment extends BFragment {
       }
     };
 
-    itemDelegate2.dispatchViewClick(android.R.id.text1, android.R.id.text2)
+    itemDelegate2.dispatchViewClick(R.id.image)
         .setOnItemClickListener(new OnItemClickListener<Person>() {
           @Override public void onItemClick(View view, int position, Person person) {
             switch (view.getId()) {
-              case android.R.id.text1:
-                Toast.makeText(view.getContext(), "text1 click Type 2 -> " + person.name,
-                    Toast.LENGTH_SHORT).show();
-                break;
-              case android.R.id.text2:
-                Toast.makeText(view.getContext(), "text2 click Type 2 -> " + person.name,
+              case R.id.image:
+                Toast.makeText(view.getContext(), "Image Click at position : " + position,
                     Toast.LENGTH_SHORT).show();
                 break;
               default:
-                Toast.makeText(view.getContext(), "itemView click Type 2 -> " + person.name,
+                Toast.makeText(view.getContext(), "Item Click at position : " + position,
                     Toast.LENGTH_SHORT).show();
                 break;
             }

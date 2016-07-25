@@ -18,4 +18,5 @@
   <string name="person_id">Person id : %1$d</string>
   <string name="person_name">Person name : %1$s</string>
   <string name="type">Type %1$d</string>
+  <string name="simple_type">Simple Type : </string>
 </resources>

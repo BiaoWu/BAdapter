@@ -30,7 +30,7 @@ public class DataBindingMultiItemFragment extends BFragment {
 
           @Override
           protected void onBind(BDataBindingViewHolder<SimpleText1Binding> holder, Person person) {
-            holder.binding.setContent(person.name);
+            holder.binding.setContent(person.toString());
           }
 
           @Override
@@ -43,28 +43,27 @@ public class DataBindingMultiItemFragment extends BFragment {
           }
         };
 
-    itemDelegate1.dispatchViewClick(android.R.id.text1)
+    itemDelegate1.dispatchViewClick(R.id.image)
         .setOnItemClickListener(new OnItemClickListener<Person>() {
           @Override public void onItemClick(View view, int position, Person person) {
             switch (view.getId()) {
-              case android.R.id.text1:
-                Toast.makeText(view.getContext(), "text1 click Type 1 -> " + person.name,
+              case R.id.image:
+                Toast.makeText(view.getContext(), "Image Click at position : " + position,
                     Toast.LENGTH_SHORT).show();
                 break;
               default:
-                Toast.makeText(view.getContext(), "itemView click Type 1 -> " + person.name,
+                Toast.makeText(view.getContext(), "Item Click at position : " + position,
                     Toast.LENGTH_SHORT).show();
                 break;
             }
           }
         });
-
     BDataBindingItemDelegate<SimpleText2Binding, Person> itemDelegate2 =
         new BDataBindingItemDelegate<SimpleText2Binding, Person>() {
 
           @Override
           protected void onBind(BDataBindingViewHolder<SimpleText2Binding> holder, Person person) {
-            holder.binding.setPerson(person);
+            holder.binding.setContent(person.toString());
           }
 
           @Override
@@ -77,20 +76,16 @@ public class DataBindingMultiItemFragment extends BFragment {
           }
         };
 
-    itemDelegate2.dispatchViewClick(R.id.tv_id, R.id.tv_name)
+    itemDelegate2.dispatchViewClick(R.id.image)
         .setOnItemClickListener(new OnItemClickListener<Person>() {
           @Override public void onItemClick(View view, int position, Person person) {
             switch (view.getId()) {
-              case R.id.tv_id:
-                Toast.makeText(view.getContext(), "id click Type 2 -> " + person.name,
-                    Toast.LENGTH_SHORT).show();
-                break;
-              case R.id.tv_name:
-                Toast.makeText(view.getContext(), "name click Type 2 -> " + person.name,
+              case R.id.image:
+                Toast.makeText(view.getContext(), "Image Click at position : " + position,
                     Toast.LENGTH_SHORT).show();
                 break;
               default:
-                Toast.makeText(view.getContext(), "itemView click Type 2 -> " + person.name,
+                Toast.makeText(view.getContext(), "Item Click at position : " + position,
                     Toast.LENGTH_SHORT).show();
                 break;
             }
