@@ -6,10 +6,16 @@
         android:id="@+id/nav_home"
         android:title="@string/main_nav_home"/>
     <item
-        android:id="@+id/simple_item"
-        android:title="@string/main_simple_item"/>
+        android:id="@+id/simple_single_item"
+        android:title="@string/main_simple_single_item"/>
     <item
-        android:id="@+id/multi_item"
-        android:title="@string/main_multi_item"/>
+        android:id="@+id/simple_multi_item"
+        android:title="@string/main_simple_multi_item"/>
+    <item
+        android:id="@+id/databinding_single_item"
+        android:title="@string/main_databinding_single_item"/>
+    <item
+        android:id="@+id/databinding_multi_item"
+        android:title="@string/main_databinding_multi_item"/>
   </group>
 </menu>

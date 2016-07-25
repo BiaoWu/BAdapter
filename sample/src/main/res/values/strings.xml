@@ -8,9 +8,14 @@
   <string name="close_string"> </string>
 
   <string name="main_nav_home">Home</string>
-  <string name="main_simple_item">Simple Item</string>
-  <string name="main_multi_item">Multi Item</string>
+  <string name="main_simple_single_item">Simple Single Item</string>
+  <string name="main_simple_multi_item">Simple Multi Item</string>
+
+  <string name="main_databinding_single_item">DataBinding Single Item</string>
+  <string name="main_databinding_multi_item">DataBinding Multi Item</string>
 
   <string name="person">Person id : %1$d, name : %2$s</string>
+  <string name="person_id">Person id : %1$d</string>
+  <string name="person_name">Person name : %1$s</string>
   <string name="type">Type %1$d</string>
 </resources>

@@ -1,0 +1,21 @@
+apply plugin: 'com.android.library'
+
+android {
+  compileSdkVersion rootProject.ext.compileSdkVersion
+  buildToolsVersion rootProject.ext.buildToolsVersion
+
+  compileOptions {
+    sourceCompatibility rootProject.ext.sourceCompatibilityVersion
+    targetCompatibility rootProject.ext.targetCompatibilityVersion
+  }
+
+  defaultConfig {
+    minSdkVersion rootProject.ext.minSdkVersion
+  }
+}
+
+dependencies {
+  compile project(':core')
+
+  testCompile rootProject.ext.junit
+}
