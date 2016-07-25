@@ -16,12 +16,13 @@
 package com.biao.badapter;
 
 import android.support.annotation.IdRes;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * User Interface
+ * Base ItemDelegate
  *
  * {@link BAdapter.Builder#itemDelegate(ItemDelegate)}
  * <pre>
@@ -33,15 +34,15 @@ import android.view.ViewGroup;
  *
  * @author biaowu.
  */
-public abstract class ItemDelegate<Data> {
+public abstract class ItemDelegate<Holder extends RecyclerView.ViewHolder, Data> {
   /* package */ int[] clickViewIds;
   /* package */ OnItemClickListener<Data> onItemClickListener;
 
   /** {@link BViewHolderManager#onCreateViewHolder(ViewGroup, int)} */
-  protected abstract BViewHolder onCreateViewHolder(LayoutInflater inflater, ViewGroup parent);
+  protected abstract Holder onCreateViewHolder(LayoutInflater inflater, ViewGroup parent);
 
-  /** {@link BViewHolderManager#onBindViewHolder(BViewHolder, int)} */
-  protected abstract void onBind(BViewHolder holder, Data data);
+  /** {@link BViewHolderManager#onBindViewHolder(RecyclerView.ViewHolder, int)} */
+  protected abstract void onBind(Holder holder, Data data);
 
   /**
    * Pass the Data to the itemDelegate
@@ -72,7 +73,7 @@ public abstract class ItemDelegate<Data> {
    *   });
    * </pre>
    */
-  @SuppressWarnings("unchecked") public <T extends ItemDelegate<Data>> T dispatchViewClick(
+  @SuppressWarnings("unchecked") public <T extends ItemDelegate<Holder, Data>> T dispatchViewClick(
       @IdRes int... ids) {
     clickViewIds = ids;
     return (T) this;
