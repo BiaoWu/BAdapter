@@ -10,8 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import com.biao.badapter.sample.multi.MultiItemFragment;
-import com.biao.badapter.sample.simple.SimpleItemFragment;
+import com.biao.badapter.sample.multi.DataBindingMultiItemFragment;
+import com.biao.badapter.sample.multi.SimpleMultiItemFragment;
+import com.biao.badapter.sample.single.DataBindingSingleItemFragment;
+import com.biao.badapter.sample.single.SimpleSingleItemFragment;
 
 public class MainActivity extends AppCompatActivity {
   private static final String TAG = "MainActivity";
@@ -51,11 +53,21 @@ public class MainActivity extends AppCompatActivity {
               case R.id.nav_home:
                 switchNavigationItem(new MainFragment(), R.string.app_name);
                 break;
-              case R.id.simple_item:
-                switchNavigationItem(new SimpleItemFragment(), R.string.main_simple_item);
+              case R.id.simple_single_item:
+                switchNavigationItem(new SimpleSingleItemFragment(),
+                    R.string.main_simple_single_item);
                 break;
-              case R.id.multi_item:
-                switchNavigationItem(new MultiItemFragment(), R.string.main_multi_item);
+              case R.id.simple_multi_item:
+                switchNavigationItem(new SimpleMultiItemFragment(),
+                    R.string.main_simple_multi_item);
+                break;
+              case R.id.databinding_single_item:
+                switchNavigationItem(new DataBindingSingleItemFragment(),
+                    R.string.main_databinding_single_item);
+                break;
+              case R.id.databinding_multi_item:
+                switchNavigationItem(new DataBindingMultiItemFragment(),
+                    R.string.main_databinding_multi_item);
                 break;
               default:
                 Log.e(TAG, "Lose this one -> " + itemId);

@@ -35,7 +35,7 @@ import static com.biao.badapter.util.PreConditions.checkNotNull;
  *
  * @author biaowu.
  */
-public class BAdapter extends RecyclerView.Adapter<BViewHolder> {
+public class BAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
   private DataSource dataSource;
   private ViewHolderManager viewHolderManager;
 
@@ -44,11 +44,11 @@ public class BAdapter extends RecyclerView.Adapter<BViewHolder> {
     this.viewHolderManager = checkNotNull(viewHolderManager, "viewHolderManager cannot be null!!!");
   }
 
-  @Override public BViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  @Override public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     return viewHolderManager.onCreateViewHolder(parent, viewType);
   }
 
-  @Override public void onBindViewHolder(BViewHolder holder, int position) {
+  @Override public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
     viewHolderManager.onBindViewHolder(holder, position);
   }
 
