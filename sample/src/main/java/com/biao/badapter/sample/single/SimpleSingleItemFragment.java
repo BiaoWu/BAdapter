@@ -1,4 +1,4 @@
-package com.biao.badapter.sample.simple;
+package com.biao.badapter.sample.single;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +12,11 @@ import com.biao.badapter.itemdelegate.simple.BSimpleItemDelegate;
 import com.biao.badapter.itemdelegate.simple.BSimpleViewHolder;
 
 /**
+ * sample of BSimpleItemDelegate
+ *
  * @author biaowu.
  */
-public class SimpleItemFragment extends BFragment {
+public class SimpleSingleItemFragment extends BFragment {
 
   @Override protected BAdapter buildAdapter() {
     BDataSource<String> dataSource = new BDataSource<>();

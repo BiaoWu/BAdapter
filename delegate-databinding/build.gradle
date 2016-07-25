@@ -12,6 +12,10 @@ android {
   defaultConfig {
     minSdkVersion rootProject.ext.minSdkVersion
   }
+
+  dataBinding {
+    enabled = true
+  }
 }
 
 dependencies {

@@ -15,7 +15,7 @@ import com.biao.badapter.sample.R;
 /**
  * @author biaowu.
  */
-public class MultiItemFragment extends BFragment {
+public class SimpleMultiItemFragment extends BFragment {
 
   @Override protected BAdapter buildAdapter() {
     BDataSource<Person> dataSource = new BDataSource<>();
