@@ -23,3 +23,5 @@ dependencies {
 
   testCompile rootProject.ext.junit
 }
+
+apply from: rootProject.file('gradle/gradle-bintray-push.gradle')

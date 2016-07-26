@@ -1,1 +1,1 @@
-include ':sample', ':core', ':delegate-simple', ':delegate-databinding'
+include ':example', ':core', ':simple', ':databinding'
