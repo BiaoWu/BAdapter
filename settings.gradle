@@ -1,1 +1,1 @@
-include ':example', ':core', ':simple', ':databinding'
+include ':example', ':badapter', ':badapter-simple', ':badapter-databinding'

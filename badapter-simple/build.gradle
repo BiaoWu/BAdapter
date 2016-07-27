@@ -15,7 +15,7 @@ android {
 }
 
 dependencies {
-  compile project(':core')
+  compile project(':badapter')
 
   testCompile rootProject.ext.junit
 }
