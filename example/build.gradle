@@ -33,8 +33,8 @@ android {
 }
 
 dependencies {
-  compile project(':simple')
-  compile project(':databinding')
+  compile project(':badapter-simple')
+  compile project(':badapter-databinding')
 
   compile "com.android.support:design:$rootProject.ext.supportLibrariesVersion"
   compile "com.android.support:cardview-v7:$rootProject.ext.supportLibrariesVersion"
