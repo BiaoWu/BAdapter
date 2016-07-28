@@ -36,4 +36,6 @@ ext {
   supportV7 = "com.android.support:appcompat-v7:$supportLibrariesVersion"
   recyclerviewV7 = "com.android.support:recyclerview-v7:$supportLibrariesVersion"
   junit = 'junit:junit:4.12'
+
+  badapter = '1.0.0'
 }

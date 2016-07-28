@@ -1,7 +1,17 @@
 # BAdapter
 A graceful RecyclerView Adapter。
 
+For more information please see [the website](https://biaowu.github.io/BAdapter/).
 
+## Download
+
+Gradle:
+
+```
+compile 'com.biao.badapter:badapter:1.0.0'
+compile 'com.biao.badapter:badapter-simple:1.0.0'
+compile 'com.biao.badapter:badapter-databinding:1.0.0'
+```
 
 License
 -------
