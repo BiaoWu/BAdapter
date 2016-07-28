@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-  compile project(':badapter')
+  compile "com.biao.badapter:badapter:$rootProject.badapter"
 
   testCompile rootProject.ext.junit
 }
