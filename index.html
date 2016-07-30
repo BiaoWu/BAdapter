@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>BAdapter</title>
-  <meta name="description" content="A graceful RecyclerView Adapter.">
+  <title></title>
+  <meta name="description" content="Introduction 中文版链接">
 
   <link rel="stylesheet" href="css/main.css">
   <link rel="canonical" href="https://biaowu.github.io/BAdapter/">
@@ -35,8 +35,6 @@
         
           
         
-          
-        
       </div>
     </nav>
 
@@ -47,9 +45,7 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <article class="post">
-  <div class="post-content">
-    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <!-- <header class="post-header">
     <h1 class="post-title" itemprop="name headline"></h1>
@@ -57,12 +53,9 @@
   </header> -->
 
   <div class="post-content" itemprop="articleBody">
-    <h2 id="introduction">Introduction</h2>
-<p>todo</p>
+    <h3 id="introduction-index-zhhtml">Introduction <a href="index-zh.html">中文版链接</a></h3>
 
-<h2 id="download">Download</h2>
-
-<p>Gradle:</p>
+<h4 id="gradle-download">1. Gradle Download</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>compile 'com.biao.badapter:badapter:1.0.0'
 compile 'com.biao.badapter:badapter-simple:1.0.0'
@@ -70,7 +63,74 @@ compile 'com.biao.badapter:badapter-databinding:1.0.0'
 </code></pre>
 </div>
 
-<h2 id="license">License</h2>
+<h4 id="recyclerview-adapter">2. RecyclerView Adapter</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>BAdapter adapter = BAdapter.builder()
+	    .dataSource(dataSource)
+	    .itemDelegate(itemDelegate)
+	    .build();
+</code></pre>
+</div>
+
+<h4 id="datasource">3. DataSource</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>BDataSource&lt;String&gt; dataSource = new BDataSource&lt;&gt;();
+</code></pre>
+</div>
+
+<h4 id="itemdelegate">4. ItemDelegate</h4>
+
+<h6 id="badapter-simple">4.1 badapter-simple</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>BSimpleItemDelegate&lt;String&gt; itemDelegate = new BSimpleItemDelegate&lt;String&gt;() {
+    @Override protected View onCreateView(LayoutInflater inflater, ViewGroup parent) {
+      return inflater.inflate(R.layout.simple_text_1, parent, false);
+    }
+
+    @Override public void onBind(BSimpleViewHolder holder, String s) {
+      holder.getTextView(R.id.tv_content).setText(s);
+    }
+  };
+</code></pre>
+</div>
+
+<h6 id="badapter-databinding">4.2 badapter-databinding</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>BDataBindingItemDelegate&lt;SimpleText1Binding, String&gt; itemDelegate =
+    new BDataBindingItemDelegate&lt;SimpleText1Binding, String&gt;() {
+      @Override
+      protected void onBind(BDataBindingViewHolder&lt;SimpleText1Binding&gt; holder, String s) {
+        holder.binding.setContent(s);
+      }
+
+      @Override
+      protected SimpleText1Binding onCreateBinding(LayoutInflater inflater, ViewGroup parent) {
+        return SimpleText1Binding.inflate(inflater, parent, false);
+      }
+    };
+</code></pre>
+</div>
+
+<h4 id="onclicklistener">5. onClickListener</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>itemDelegate.dispatchViewClick(R.id.image)
+    .setOnItemClickListener(new OnItemClickListener&lt;String&gt;() {
+      @Override public void onItemClick(View view, int position, String s) {
+        switch (view.getId()) {
+          case R.id.image:
+            Toast.makeText(view.getContext(), "Image Click at " + s, Toast.LENGTH_SHORT).show();
+            break;
+          default:
+            Toast.makeText(view.getContext(), "Item Click at " + s, Toast.LENGTH_SHORT).show();
+            break;
+        }
+      }
+    });
+</code></pre>
+</div>
+
+<h4 id="license">License</h4>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>Copyright 2016 BiaoWu
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -89,9 +149,6 @@ limitations under the License.
 
   </div>
 
-</article>
-
-  </div>
 </article>
 
       </div>

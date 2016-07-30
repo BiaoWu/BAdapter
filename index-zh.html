@@ -7,10 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title></title>
-  <meta name="description" content="Introductiontodo">
+  <meta name="description" content="简介 English">
 
   <link rel="stylesheet" href="css/main.css">
-  <link rel="canonical" href="https://biaowu.github.io/BAdapter/2016/07/29/home.html">
+  <link rel="canonical" href="https://biaowu.github.io/BAdapter/index-zh.html">
 </head>
 
 
@@ -35,8 +35,6 @@
         
           
         
-          
-        
       </div>
     </nav>
 
@@ -55,12 +53,9 @@
   </header> -->
 
   <div class="post-content" itemprop="articleBody">
-    <h2 id="introduction">Introduction</h2>
-<p>todo</p>
+    <h3 id="englishindexhtml">简介 <a href="index.html">English</a></h3>
 
-<h2 id="download">Download</h2>
-
-<p>Gradle:</p>
+<h4 id="gradle-">1. Gradle 引用</h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>compile 'com.biao.badapter:badapter:1.0.0'
 compile 'com.biao.badapter:badapter-simple:1.0.0'
@@ -68,7 +63,77 @@ compile 'com.biao.badapter:badapter-databinding:1.0.0'
 </code></pre>
 </div>
 
-<h2 id="license">License</h2>
+<h4 id="recyclerview-adapter">2. RecyclerView Adapter</h4>
+<blockquote>
+  <p>目前就这一种创建方式</p>
+</blockquote>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>BAdapter adapter = BAdapter.builder()
+	    .dataSource(dataSource)
+	    .itemDelegate(itemDelegate)
+	    .build();
+</code></pre>
+</div>
+
+<h4 id="section">3. 数据源</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>BDataSource&lt;String&gt; dataSource = new BDataSource&lt;&gt;();
+</code></pre>
+</div>
+
+<h4 id="item">4. Item代理</h4>
+
+<h6 id="badapter-">4.1 badapter 简单辅助类</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>BSimpleItemDelegate&lt;String&gt; itemDelegate = new BSimpleItemDelegate&lt;String&gt;() {
+    @Override protected View onCreateView(LayoutInflater inflater, ViewGroup parent) {
+      return inflater.inflate(R.layout.simple_text_1, parent, false);
+    }
+
+    @Override public void onBind(BSimpleViewHolder holder, String s) {
+      holder.getTextView(R.id.tv_content).setText(s);
+    }
+  };
+</code></pre>
+</div>
+
+<h6 id="badapter-databinding">4.2 badapter databinding辅助类</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>BDataBindingItemDelegate&lt;SimpleText1Binding, String&gt; itemDelegate =
+    new BDataBindingItemDelegate&lt;SimpleText1Binding, String&gt;() {
+      @Override
+      protected void onBind(BDataBindingViewHolder&lt;SimpleText1Binding&gt; holder, String s) {
+        holder.binding.setContent(s);
+      }
+
+      @Override
+      protected SimpleText1Binding onCreateBinding(LayoutInflater inflater, ViewGroup parent) {
+        return SimpleText1Binding.inflate(inflater, parent, false);
+      }
+    };
+</code></pre>
+</div>
+
+<h4 id="section-1">5. 点击事件</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>itemDelegate.dispatchViewClick(R.id.image)
+    .setOnItemClickListener(new OnItemClickListener&lt;String&gt;() {
+      @Override public void onItemClick(View view, int position, String s) {
+        switch (view.getId()) {
+          case R.id.image:
+            Toast.makeText(view.getContext(), "Image Click at " + s, Toast.LENGTH_SHORT).show();
+            break;
+          default:
+            Toast.makeText(view.getContext(), "Item Click at " + s, Toast.LENGTH_SHORT).show();
+            break;
+        }
+      }
+    });
+</code></pre>
+</div>
+
+<h4 id="license">License</h4>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>Copyright 2016 BiaoWu
 
 Licensed under the Apache License, Version 2.0 (the "License");
