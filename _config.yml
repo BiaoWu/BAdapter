@@ -10,7 +10,8 @@ title: BAdapter
 email: biaoliu_2007@163.com
 description: A graceful RecyclerView Adapter.
 
-url: "https://biaowu.github.io/BAdapter"
+url:
+baseurl: ""
 
 github_username:  BiaoWu
 
