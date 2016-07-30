@@ -33,3 +33,6 @@ git commit -m "Website at $(date)"
 
 # Push the new files up to GitHub
 git push origin gh-pages
+
+# return to website
+git checkout website
