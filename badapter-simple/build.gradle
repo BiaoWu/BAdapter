@@ -1,23 +1,19 @@
 apply plugin: 'com.android.library'
 
 android {
-  compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
-
-  compileOptions {
-    sourceCompatibility rootProject.ext.sourceCompatibilityVersion
-    targetCompatibility rootProject.ext.targetCompatibilityVersion
-  }
+  compileSdkVersion rootProject.compileSdkVersion
+  buildToolsVersion rootProject.buildToolsVersion
 
   defaultConfig {
-    minSdkVersion rootProject.ext.minSdkVersion
+    minSdkVersion rootProject.minSdkVersion
+    targetSdkVersion rootProject.targetSdkVersion
   }
 }
 
 dependencies {
-  compile "com.biao.badapter:badapter:$rootProject.badapter"
-
-  testCompile rootProject.ext.junit
+  provided project(':badapter')
+  compile "com.android.support:appcompat-v7:$rootProject.supportLibrary"
+  testCompile "junit:junit:$rootProject.junit"
 }
 
 apply from: rootProject.file('gradle/gradle-bintray-push.gradle')

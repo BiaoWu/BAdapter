@@ -1,18 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-  compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
-
-  compileOptions {
-    sourceCompatibility rootProject.ext.sourceCompatibilityVersion
-    targetCompatibility rootProject.ext.targetCompatibilityVersion
-  }
+  compileSdkVersion rootProject.compileSdkVersion
+  buildToolsVersion rootProject.buildToolsVersion
 
   defaultConfig {
     applicationId "com.biao.badapter.sample"
-    minSdkVersion rootProject.ext.minSdkVersion
-    targetSdkVersion rootProject.ext.targetSdkVersion
+    minSdkVersion rootProject.minSdkVersion
+    targetSdkVersion rootProject.targetSdkVersion
     versionCode 1
     versionName "1.0"
   }
@@ -36,11 +31,11 @@ dependencies {
   compile project(':badapter-simple')
   compile project(':badapter-databinding')
   compile project(':badapter')
-
-  compile "com.android.support:design:$rootProject.ext.supportLibrariesVersion"
-  compile "com.android.support:cardview-v7:$rootProject.ext.supportLibrariesVersion"
+  compile "com.android.support:appcompat-v7:$rootProject.supportLibrary"
+  compile "com.android.support:design:$rootProject.supportLibrary"
+  compile "com.android.support:cardview-v7:$rootProject.supportLibrary"
 
   compile 'us.feras.mdv:markdownview:1.1.0'
 
-  testCompile rootProject.ext.junit
+  testCompile "junit:junit:$rootProject.junit"
 }

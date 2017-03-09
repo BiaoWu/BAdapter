@@ -1,16 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-  compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
-
-  compileOptions {
-    sourceCompatibility rootProject.ext.sourceCompatibilityVersion
-    targetCompatibility rootProject.ext.targetCompatibilityVersion
-  }
+  compileSdkVersion rootProject.compileSdkVersion
+  buildToolsVersion rootProject.buildToolsVersion
 
   defaultConfig {
-    minSdkVersion rootProject.ext.minSdkVersion
+    minSdkVersion rootProject.minSdkVersion
+    targetSdkVersion rootProject.targetSdkVersion
   }
 
   lintOptions {
@@ -19,10 +15,10 @@ android {
 }
 
 dependencies {
-  compile rootProject.ext.supportV7
-  compile rootProject.ext.recyclerviewV7
+  compile "com.android.support:appcompat-v7:$rootProject.supportLibrary"
+  compile "com.android.support:recyclerview-v7:$rootProject.supportLibrary"
 
-  testCompile rootProject.ext.junit
+  testCompile "junit:junit:$rootProject.junit"
 }
 
 apply from: rootProject.file('gradle/gradle-bintray-push.gradle')
