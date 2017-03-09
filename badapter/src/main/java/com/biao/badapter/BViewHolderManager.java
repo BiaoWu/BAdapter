@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.biao.badapter.util.PreConditions;
 import java.util.List;
+import java.util.Random;
 
 /**
  * implement of {@link ViewHolderManager}
@@ -51,13 +52,24 @@ import java.util.List;
     int size = list.size();
     itemDelegates = new SparseArray<>(size);
 
-    int viewType = 0;
+    Random randomViewType = new Random();
+    int viewType;
+    ItemDelegate itemDelegate;
     for (int i = 0; i < size; i++) {
-      itemDelegates.put(++viewType, list.get(i));
+      itemDelegate = list.get(i);
+      viewType = itemDelegate.getViewType();
+      if (viewType == -1) {
+        do {
+          viewType = randomViewType.nextInt(255) + 1;
+        } while (itemDelegates.get(viewType) != null);
+      }
+      itemDelegate.viewType = viewType;
+      itemDelegates.put(viewType, itemDelegate);
     }
   }
 
-  @Override public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  @Override
+  public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     return PreConditions.checkNotNull(itemDelegates.get(viewType), MISS_ITEM_DELEGATE)
         .onCreateViewHolder(LayoutInflater.from(parent.getContext()), parent);
   }

@@ -35,6 +35,7 @@ import android.view.ViewGroup;
  * @author biaowu.
  */
 public abstract class ItemDelegate<Holder extends RecyclerView.ViewHolder, Data> {
+  /* package */ int viewType = -1;
   /* package */ int[] clickViewIds;
   /* package */ OnItemClickListener<Data> onItemClickListener;
 
@@ -86,5 +87,9 @@ public abstract class ItemDelegate<Holder extends RecyclerView.ViewHolder, Data>
    */
   public void setOnItemClickListener(OnItemClickListener<Data> onItemClickListener) {
     this.onItemClickListener = onItemClickListener;
+  }
+
+  public int getViewType() {
+    return viewType;
   }
 }
