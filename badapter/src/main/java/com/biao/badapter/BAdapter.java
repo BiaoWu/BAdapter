@@ -39,7 +39,7 @@ public class BAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
   private DataSource dataSource;
   private ViewHolderManager viewHolderManager;
 
-  private BAdapter(DataSource dataSource, ViewHolderManager viewHolderManager) {
+  protected BAdapter(DataSource dataSource, ViewHolderManager viewHolderManager) {
     this.dataSource = checkNotNull(dataSource, "dataSource cannot be null!!!");
     this.viewHolderManager = checkNotNull(viewHolderManager, "viewHolderManager cannot be null!!!");
   }
@@ -58,6 +58,10 @@ public class BAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
   @Override public int getItemViewType(int position) {
     return viewHolderManager.getItemViewType(position);
+  }
+
+  public DataSource getDataSource() {
+    return dataSource;
   }
 
   /** Create BAdapter {@link Builder} */
