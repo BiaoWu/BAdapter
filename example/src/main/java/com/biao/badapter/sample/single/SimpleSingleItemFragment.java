@@ -19,31 +19,39 @@ import com.biao.badapter.sample.R;
  */
 public class SimpleSingleItemFragment extends BFragment {
 
-  @Override protected BAdapter buildAdapter() {
+  @Override
+  protected BAdapter buildAdapter() {
     BDataSource<String> dataSource = new BDataSource<>();
     for (int i = 0; i < 30; i++) {
       dataSource.add("index : " + i);
     }
 
     BSimpleItemDelegate<String> itemDelegate = new BSimpleItemDelegate<String>() {
-      @Override protected View onCreateView(LayoutInflater inflater, ViewGroup parent) {
+      @Override
+      protected View onCreateView(LayoutInflater inflater, ViewGroup parent) {
         return inflater.inflate(R.layout.simple_text_1, parent, false);
       }
 
-      @Override public void onBind(BSimpleViewHolder holder, String s) {
+      @Override
+      public void onBind(BSimpleViewHolder holder, String s) {
         holder.getTextView(R.id.tv_content).setText(s);
       }
     };
 
     itemDelegate.dispatchViewClick(R.id.image)
-        .setOnItemClickListener(new OnItemClickListener<String>() {
-          @Override public void onItemClick(View view, int position, String s) {
+        .setOnItemClickListener(new OnItemClickListener<BSimpleViewHolder, String>() {
+          @Override
+          public void onItemClick(View view, BSimpleViewHolder viewHolder, String s) {
             switch (view.getId()) {
               case R.id.image:
-                Toast.makeText(view.getContext(), "Image Click at " + s, Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(),
+                    "Image Click at position : " + viewHolder.getAdapterPosition(),
+                    Toast.LENGTH_SHORT).show();
                 break;
               default:
-                Toast.makeText(view.getContext(), "Item Click at " + s, Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(),
+                    "Item Click at position : " + viewHolder.getAdapterPosition(),
+                    Toast.LENGTH_SHORT).show();
                 break;
             }
           }

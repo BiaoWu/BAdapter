@@ -37,7 +37,7 @@ import android.view.ViewGroup;
 public abstract class ItemDelegate<Holder extends RecyclerView.ViewHolder, Data> {
   /* package */ int viewType = -1;
   /* package */ int[] clickViewIds;
-  /* package */ OnItemClickListener<Data> onItemClickListener;
+  /* package */ OnItemClickListener<Holder, Data> onItemClickListener;
 
   /** {@link BViewHolderManager#onCreateViewHolder(ViewGroup, int)} */
   protected abstract Holder onCreateViewHolder(LayoutInflater inflater, ViewGroup parent);
@@ -57,11 +57,11 @@ public abstract class ItemDelegate<Holder extends RecyclerView.ViewHolder, Data>
   }
 
   /**
-   * Pass the click to {@link OnItemClickListener#onItemClick(View, int, Object)}
+   * Pass the click to {@link OnItemClickListener#onItemClick}
    * <pre>
    *    itemDelegate.dispatchViewClick(id1, id2)
-   *      .setOnItemClickListener(new OnItemClickListener<Data>() {
-   *         @Override public void onItemClick(View view, int position, Data data) {
+   *      .setOnItemClickListener(new OnItemClickListener<...>() {
+   *         @Override public void onItemClick(...) {
    *           switch (view.getId()) {
    *             case id1:
    *               break;
@@ -74,8 +74,8 @@ public abstract class ItemDelegate<Holder extends RecyclerView.ViewHolder, Data>
    *   });
    * </pre>
    */
-  @SuppressWarnings("unchecked") public <T extends ItemDelegate<Holder, Data>> T dispatchViewClick(
-      @IdRes int... ids) {
+  @SuppressWarnings("unchecked")
+  public <T extends ItemDelegate<Holder, Data>> T dispatchViewClick(@IdRes int... ids) {
     clickViewIds = ids;
     return (T) this;
   }
@@ -85,7 +85,7 @@ public abstract class ItemDelegate<Holder extends RecyclerView.ViewHolder, Data>
    *
    * @param onItemClickListener The callback that will run
    */
-  public void setOnItemClickListener(OnItemClickListener<Data> onItemClickListener) {
+  public void setOnItemClickListener(OnItemClickListener<Holder, Data> onItemClickListener) {
     this.onItemClickListener = onItemClickListener;
   }
 

@@ -20,7 +20,8 @@ import com.biao.delegate.databinding.BDataBindingViewHolder;
  */
 public class DataBindingSingleItemFragment extends BFragment {
 
-  @Override protected BAdapter buildAdapter() {
+  @Override
+  protected BAdapter buildAdapter() {
     BDataSource<String> dataSource = new BDataSource<>();
     for (int i = 0; i < 30; i++) {
       dataSource.add("index : " + i);
@@ -40,18 +41,25 @@ public class DataBindingSingleItemFragment extends BFragment {
         };
 
     itemDelegate.dispatchViewClick(R.id.image)
-        .setOnItemClickListener(new OnItemClickListener<String>() {
-          @Override public void onItemClick(View view, int position, String s) {
-            switch (view.getId()) {
-              case R.id.image:
-                Toast.makeText(view.getContext(), "Image Click at " + s, Toast.LENGTH_SHORT).show();
-                break;
-              default:
-                Toast.makeText(view.getContext(), "Item Click at " + s, Toast.LENGTH_SHORT).show();
-                break;
-            }
-          }
-        });
+        .setOnItemClickListener(
+            new OnItemClickListener<BDataBindingViewHolder<SimpleText1Binding>, String>() {
+              @Override
+              public void onItemClick(View view,
+                  BDataBindingViewHolder<SimpleText1Binding> viewHolder, String s) {
+                switch (view.getId()) {
+                  case R.id.image:
+                    Toast.makeText(view.getContext(),
+                        "Image Click at position : " + viewHolder.getAdapterPosition(),
+                        Toast.LENGTH_SHORT).show();
+                    break;
+                  default:
+                    Toast.makeText(view.getContext(),
+                        "Item Click at position : " + viewHolder.getAdapterPosition(),
+                        Toast.LENGTH_SHORT).show();
+                    break;
+                }
+              }
+            });
 
     return BAdapter.builder().dataSource(dataSource).itemDelegate(itemDelegate).build();
   }

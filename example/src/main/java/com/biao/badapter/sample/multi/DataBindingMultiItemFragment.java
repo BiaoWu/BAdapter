@@ -19,7 +19,8 @@ import com.biao.delegate.databinding.BDataBindingViewHolder;
  */
 public class DataBindingMultiItemFragment extends BFragment {
 
-  @Override protected BAdapter buildAdapter() {
+  @Override
+  protected BAdapter buildAdapter() {
     BDataSource<Person> dataSource = new BDataSource<>();
     for (int i = 1; i <= 30; i++) {
       dataSource.add(new Person(i, "Clone Bill No." + i));
@@ -38,26 +39,32 @@ public class DataBindingMultiItemFragment extends BFragment {
             return SimpleText1Binding.inflate(inflater, parent, false);
           }
 
-          @Override protected boolean onIntercept(int position, Object o) {
+          @Override
+          protected boolean onIntercept(int position, Object o) {
             return o instanceof Person && ((Person) o).id % 2 == 0;
           }
         };
 
     itemDelegate1.dispatchViewClick(R.id.image)
-        .setOnItemClickListener(new OnItemClickListener<Person>() {
-          @Override public void onItemClick(View view, int position, Person person) {
-            switch (view.getId()) {
-              case R.id.image:
-                Toast.makeText(view.getContext(), "Image Click at position : " + position,
-                    Toast.LENGTH_SHORT).show();
-                break;
-              default:
-                Toast.makeText(view.getContext(), "Item Click at position : " + position,
-                    Toast.LENGTH_SHORT).show();
-                break;
-            }
-          }
-        });
+        .setOnItemClickListener(
+            new OnItemClickListener<BDataBindingViewHolder<SimpleText1Binding>, Person>() {
+              @Override
+              public void onItemClick(View view,
+                  BDataBindingViewHolder<SimpleText1Binding> viewHolder, Person person) {
+                switch (view.getId()) {
+                  case R.id.image:
+                    Toast.makeText(view.getContext(),
+                        "Image Click at position : " + viewHolder.getAdapterPosition(),
+                        Toast.LENGTH_SHORT).show();
+                    break;
+                  default:
+                    Toast.makeText(view.getContext(),
+                        "Item Click at position : " + viewHolder.getAdapterPosition(),
+                        Toast.LENGTH_SHORT).show();
+                    break;
+                }
+              }
+            });
     BDataBindingItemDelegate<SimpleText2Binding, Person> itemDelegate2 =
         new BDataBindingItemDelegate<SimpleText2Binding, Person>() {
 
@@ -71,26 +78,32 @@ public class DataBindingMultiItemFragment extends BFragment {
             return SimpleText2Binding.inflate(inflater, parent, false);
           }
 
-          @Override protected boolean onIntercept(int position, Object o) {
+          @Override
+          protected boolean onIntercept(int position, Object o) {
             return o instanceof Person && ((Person) o).id % 2 != 0;
           }
         };
 
     itemDelegate2.dispatchViewClick(R.id.image)
-        .setOnItemClickListener(new OnItemClickListener<Person>() {
-          @Override public void onItemClick(View view, int position, Person person) {
-            switch (view.getId()) {
-              case R.id.image:
-                Toast.makeText(view.getContext(), "Image Click at position : " + position,
-                    Toast.LENGTH_SHORT).show();
-                break;
-              default:
-                Toast.makeText(view.getContext(), "Item Click at position : " + position,
-                    Toast.LENGTH_SHORT).show();
-                break;
-            }
-          }
-        });
+        .setOnItemClickListener(
+            new OnItemClickListener<BDataBindingViewHolder<SimpleText2Binding>, Person>() {
+              @Override
+              public void onItemClick(View view,
+                  BDataBindingViewHolder<SimpleText2Binding> viewHolder, Person person) {
+                switch (view.getId()) {
+                  case R.id.image:
+                    Toast.makeText(view.getContext(),
+                        "Image Click at position : " + viewHolder.getAdapterPosition(),
+                        Toast.LENGTH_SHORT).show();
+                    break;
+                  default:
+                    Toast.makeText(view.getContext(),
+                        "Item Click at position : " + viewHolder.getAdapterPosition(),
+                        Toast.LENGTH_SHORT).show();
+                    break;
+                }
+              }
+            });
 
     return BAdapter.builder()
         .dataSource(dataSource)
