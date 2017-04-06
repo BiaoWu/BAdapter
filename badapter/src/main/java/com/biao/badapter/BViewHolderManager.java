@@ -38,11 +38,11 @@ import java.util.Random;
   private SparseArray<ItemDelegate> itemDelegates;
 
   private View.OnClickListener onItemClick = new View.OnClickListener() {
-    @Override public void onClick(View v) {
-      int position = (int) v.getTag(R.id.rv_position);
-      int itemType = (int) v.getTag(R.id.rv_view_type);
+    @Override
+    public void onClick(View v) {
+      RecyclerView.ViewHolder holder = (RecyclerView.ViewHolder) v.getTag(R.id.rv_view_holder);
 
-      onItemViewClick(v, itemType, position);
+      onItemViewClick(v, holder);
     }
   };
 
@@ -74,7 +74,8 @@ import java.util.Random;
         .onCreateViewHolder(LayoutInflater.from(parent.getContext()), parent);
   }
 
-  @SuppressWarnings("unchecked") @Override
+  @SuppressWarnings("unchecked")
+  @Override
   public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
     int viewType = holder.getItemViewType();
     ItemDelegate itemDelegate =
@@ -84,8 +85,7 @@ import java.util.Random;
 
     //set item click
     if (itemDelegate.onItemClickListener != null) {
-      holder.itemView.setTag(R.id.rv_position, position);
-      holder.itemView.setTag(R.id.rv_view_type, viewType);
+      holder.itemView.setTag(R.id.rv_view_holder, holder);
       holder.itemView.setOnClickListener(onItemClick);
 
       int[] ids = itemDelegate.clickViewIds;
@@ -94,8 +94,7 @@ import java.util.Random;
       for (int id : ids) {
         View view = holder.itemView.findViewById(id);
         if (view != null) {
-          view.setTag(R.id.rv_position, position);
-          view.setTag(R.id.rv_view_type, viewType);
+          view.setTag(R.id.rv_view_holder, holder);
           view.setOnClickListener(onItemClick);
         } else {
           Log.e(TAG, "Not found the view by id -> " + id);
@@ -104,7 +103,8 @@ import java.util.Random;
     }
   }
 
-  @Override public int getItemViewType(int position) {
+  @Override
+  public int getItemViewType(int position) {
     for (int i = 0; i < itemDelegates.size(); i++) {
       int viewType = itemDelegates.keyAt(i);
       if (itemDelegates.get(viewType).onIntercept(position, dataSource.get(position))) {
@@ -115,13 +115,13 @@ import java.util.Random;
   }
 
   @SuppressWarnings("unchecked")
-  private void onItemViewClick(View view, int itemType, int position) {
+  private void onItemViewClick(View view, RecyclerView.ViewHolder holder) {
     ItemDelegate itemDelegate =
-        PreConditions.checkNotNull(itemDelegates.get(itemType), MISS_ITEM_DELEGATE);
+        PreConditions.checkNotNull(itemDelegates.get(holder.getItemViewType()), MISS_ITEM_DELEGATE);
 
     OnItemClickListener onItemClickListener = itemDelegate.onItemClickListener;
     if (onItemClickListener != null) {
-      onItemClickListener.onItemClick(view, position, dataSource.get(position));
+      onItemClickListener.onItemClick(view, holder, dataSource.get(holder.getAdapterPosition()));
     }
   }
 }

@@ -15,6 +15,7 @@
  */
 package com.biao.badapter;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
@@ -22,13 +23,13 @@ import android.view.View;
  *
  * @author biaowu.
  */
-public interface OnItemClickListener<T> {
+public interface OnItemClickListener<ViewHolder extends RecyclerView.ViewHolder, T> {
   /**
    * Called when a view has been clicked.
    *
    * @param view The view that was clicked.
-   * @param position adapter position
+   * @param viewHolder {@link ViewHolder}
    * @param t {@link T}
    */
-  void onItemClick(View view, int position, T t);
+  void onItemClick(View view, ViewHolder viewHolder, T t);
 }
