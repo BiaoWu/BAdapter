@@ -8,9 +8,9 @@ For more information please see [the website](https://biaowu.github.io/BAdapter/
 Gradle:
 
 ```
-compile 'com.biao.badapter:badapter:1.1.1'
-compile 'com.biao.badapter:badapter-simple:1.1.1'
-compile 'com.biao.badapter:badapter-databinding:1.1.1'
+compile 'com.biao.badapter:badapter:1.2.0'
+compile 'com.biao.badapter:badapter-simple:1.2.0'
+compile 'com.biao.badapter:badapter-databinding:1.2.0'
 ```
 
 License
